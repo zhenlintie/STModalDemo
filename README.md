@@ -29,4 +29,5 @@ STModal *modal = [STModal modal];
 
 * 基于`STModal`做的一个提示视图。
 * 效果图
+	
 	![](https://github.com/zhenlintie/STModalDemo/raw/master/screenshot2.gif)
