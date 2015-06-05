@@ -277,9 +277,9 @@
     [button setTitle:title forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     button.tag = tag;
-    [button setTitleColor:STAVRGBA(250, 190, 180, 1) forState:UIControlStateNormal];
-    [button setBackgroundImage:[self imageWithColor:STAVRGBA(140, 140, 150, 0.65)] forState:UIControlStateNormal];
-    [button setBackgroundImage:[self imageWithColor:STAVRGBA(140, 140, 150, 0.45)] forState:UIControlStateHighlighted];
+    [button setTitleColor:STAVRGBA(220, 210, 200, 1) forState:UIControlStateNormal];
+    [button setBackgroundImage:[self imageWithColor:STAVRGBA(135, 140, 145, 0.65)] forState:UIControlStateNormal];
+    [button setBackgroundImage:[self imageWithColor:STAVRGBA(135, 140, 145, 0.45)] forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_containerView addSubview:button];
     [_buttons addObject:button];
