@@ -24,4 +24,4 @@ STModal *modal = [STModal modal];
 ```
 * 截图
 
-![](/STModelDemo/raw/master/screenshot.png)
+![](/STModelDemo/raw/master/screenshot1.png)
