@@ -23,7 +23,7 @@ STModal *modal = [STModal modal];
 ```
 ### 截图
 
-![](https://github.com/zhenlintie/STModalDemo/raw/master/screenshot1.png)
+![](https://github.com/zhenlintie/STModalDemo/raw/master/screenshot.png)
 
 ##  STAlertView
 
