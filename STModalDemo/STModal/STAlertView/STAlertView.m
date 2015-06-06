@@ -13,6 +13,7 @@
 #define kSTAlertPaddingV     11
 #define kSTAlertPaddingH     18
 #define kSTAlertRadius       13
+#define kSTAlertButtonHeight 40
 
 #define STAVRGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
@@ -136,20 +137,21 @@
     }
     [self resetViews];
     _scrollBottom = 0;
-    _buttonsHeight = 0;
     CGFloat insetY = kSTAlertPaddingV;
     _maxContentWidth = kSTAlertWidth-2*kSTAlertPaddingH;
-    _maxAlertViewHeight = [UIScreen mainScreen].bounds.size.height-100;
+    _maxAlertViewHeight = [UIScreen mainScreen].bounds.size.height-50;
     [self loadTitle];
     [self loadImage];
     [self loadMessage];
-    [self loadButtons];
+    _buttonsHeight = kSTAlertButtonHeight*(_buttonTitles.count>2?_buttonTitles.count:1);
     self.frame = CGRectMake(0, 0, kSTAlertWidth, MIN(MAX(_scrollBottom+2*insetY+_buttonsHeight, 2*kSTAlertRadius+kSTAlertPaddingV), _maxAlertViewHeight));
     _backgroundView.frame = self.bounds;
     _containerView.frame = self.bounds;
-    _scrollView.frame = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight);
+    _scrollView.frame = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),MIN(_scrollBottom, CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight));
     _scrollView.contentSize = CGSizeMake(_maxContentWidth, _scrollBottom);
     _didLayouted = YES;
+    
+    [self loadButtons];
 }
 
 - (void)resetViews{
@@ -244,10 +246,9 @@
     if (!_buttonTitles || _buttonTitles.count==0){
         return;
     }
-    CGFloat buttonHeight = 40;
+    CGFloat buttonHeight = kSTAlertButtonHeight;
     CGFloat buttonWidth = kSTAlertWidth;
-    _buttonsHeight = buttonHeight;
-    CGFloat top = MIN(_scrollBottom+2*kSTAlertPaddingV, _maxAlertViewHeight-buttonHeight);
+    CGFloat top = CGRectGetHeight(_containerView.frame)-_buttonsHeight;
     [self addLine:CGRectMake(0, top-0.5, buttonWidth, 0.5) toView:_containerView];
     if (1 == _buttonTitles.count){
         [self addButton:CGRectMake(0, top, buttonWidth, buttonHeight) title:[_buttonTitles firstObject] tag:0];
@@ -258,17 +259,18 @@
         [self addLine:CGRectMake(0+buttonWidth/2-.5, top, 0.5, buttonHeight) toView:_containerView];
     }
     else{
-        for (NSInteger i=_buttonTitles.count-1; i>=0; i--){
+        
+        for (NSInteger i=0; i<_buttonTitles.count; i++){
             [self addButton:CGRectMake(0, top, buttonWidth, buttonHeight) title:_buttonTitles[i] tag:i];
-            top -= buttonHeight;
-            if (0!=i){
+            top += buttonHeight;
+            if (_buttonTitles.count-1!=i){
                 [self addLine:CGRectMake(0, top, buttonWidth, 0.5) toView:_containerView];
             }
         }
         [_lines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [_containerView bringSubviewToFront:obj];
         }];
-        _buttonsHeight = buttonHeight*_buttonTitles.count;
+        
     }
 }
 
