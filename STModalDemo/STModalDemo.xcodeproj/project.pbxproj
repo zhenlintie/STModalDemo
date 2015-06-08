@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CCA2BD51B22A7A100462E41 /* STActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA2BD41B22A7A100462E41 /* STActionSheet.m */; };
 		9CCAF58D1B21608600A7647F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF58C1B21608600A7647F /* main.m */; };
 		9CCAF5901B21608600A7647F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF58F1B21608600A7647F /* AppDelegate.m */; };
 		9CCAF5931B21608600A7647F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5921B21608600A7647F /* ViewController.m */; };
@@ -16,9 +17,12 @@
 		9CCAF5A71B21608600A7647F /* STModalDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5A61B21608600A7647F /* STModalDemoTests.m */; };
 		9CCAF5B31B2160BB00A7647F /* STModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5B21B2160BB00A7647F /* STModal.m */; };
 		9CCAF5B81B2178DF00A7647F /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5B71B2178DF00A7647F /* STAlertView.m */; };
-		9CCAF5BB1B21A04300A7647F /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BA1B21A04300A7647F /* DemoViewController.m */; };
+		9CCAF5BB1B21A04300A7647F /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BA1B21A04300A7647F /* AlertViewController.m */; };
 		9CCAF5BF1B21AAE100A7647F /* lufei@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BD1B21AAE100A7647F /* lufei@2x.jpg */; };
 		9CCAF5C01B21AAE100A7647F /* onepiece@3x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BE1B21AAE100A7647F /* onepiece@3x.jpeg */; };
+		9CCB63871B24912300F951AD /* ActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCB63861B24912300F951AD /* ActionSheetViewController.m */; };
+		9CCC338F1B25445C00B890F2 /* share_friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CCC338D1B25445C00B890F2 /* share_friend@2x.png */; };
+		9CCC33901B25445C00B890F2 /* share_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CCC338E1B25445C00B890F2 /* share_wechat@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9CCA2BD31B22A7A100462E41 /* STActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STActionSheet.h; sourceTree = "<group>"; };
+		9CCA2BD41B22A7A100462E41 /* STActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STActionSheet.m; sourceTree = "<group>"; };
 		9CCAF5871B21608600A7647F /* STModalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STModalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CCAF58B1B21608600A7647F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CCAF58C1B21608600A7647F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,10 +55,15 @@
 		9CCAF5B21B2160BB00A7647F /* STModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STModal.m; sourceTree = "<group>"; };
 		9CCAF5B61B2178DF00A7647F /* STAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAlertView.h; sourceTree = "<group>"; };
 		9CCAF5B71B2178DF00A7647F /* STAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAlertView.m; sourceTree = "<group>"; };
-		9CCAF5B91B21A04300A7647F /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
-		9CCAF5BA1B21A04300A7647F /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		9CCAF5B91B21A04300A7647F /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
+		9CCAF5BA1B21A04300A7647F /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
 		9CCAF5BD1B21AAE100A7647F /* lufei@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "lufei@2x.jpg"; sourceTree = "<group>"; };
 		9CCAF5BE1B21AAE100A7647F /* onepiece@3x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "onepiece@3x.jpeg"; sourceTree = "<group>"; };
+		9CCB63841B248BA300F951AD /* STModalUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STModalUtil.h; sourceTree = "<group>"; };
+		9CCB63851B24912300F951AD /* ActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetViewController.h; sourceTree = "<group>"; };
+		9CCB63861B24912300F951AD /* ActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetViewController.m; sourceTree = "<group>"; };
+		9CCC338D1B25445C00B890F2 /* share_friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_friend@2x.png"; sourceTree = "<group>"; };
+		9CCC338E1B25445C00B890F2 /* share_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_wechat@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +108,10 @@
 			children = (
 				9CCAF5911B21608600A7647F /* ViewController.h */,
 				9CCAF5921B21608600A7647F /* ViewController.m */,
-				9CCAF5B91B21A04300A7647F /* DemoViewController.h */,
-				9CCAF5BA1B21A04300A7647F /* DemoViewController.m */,
+				9CCAF5B91B21A04300A7647F /* AlertViewController.h */,
+				9CCAF5BA1B21A04300A7647F /* AlertViewController.m */,
+				9CCB63851B24912300F951AD /* ActionSheetViewController.h */,
+				9CCB63861B24912300F951AD /* ActionSheetViewController.m */,
 				9CCAF5941B21608600A7647F /* Main.storyboard */,
 				9CCAF5BC1B21A05000A7647F /* res */,
 			);
@@ -134,6 +147,7 @@
 		9CCAF5B01B2160A100A7647F /* STModal */ = {
 			isa = PBXGroup;
 			children = (
+				9CCB63831B248B8E00F951AD /* util */,
 				9CCAF5B41B21789100A7647F /* STActionSheet */,
 				9CCAF5B51B21789100A7647F /* STAlertView */,
 				9CCAF5B11B2160BB00A7647F /* STModal.h */,
@@ -145,6 +159,8 @@
 		9CCAF5B41B21789100A7647F /* STActionSheet */ = {
 			isa = PBXGroup;
 			children = (
+				9CCA2BD31B22A7A100462E41 /* STActionSheet.h */,
+				9CCA2BD41B22A7A100462E41 /* STActionSheet.m */,
 			);
 			path = STActionSheet;
 			sourceTree = "<group>";
@@ -161,6 +177,8 @@
 		9CCAF5BC1B21A05000A7647F /* res */ = {
 			isa = PBXGroup;
 			children = (
+				9CCC338D1B25445C00B890F2 /* share_friend@2x.png */,
+				9CCC338E1B25445C00B890F2 /* share_wechat@2x.png */,
 				9CCAF5BD1B21AAE100A7647F /* lufei@2x.jpg */,
 				9CCAF5BE1B21AAE100A7647F /* onepiece@3x.jpeg */,
 				9CCAF58A1B21608600A7647F /* Supporting Files */,
@@ -170,6 +188,14 @@
 				9CCAF5991B21608600A7647F /* LaunchScreen.xib */,
 			);
 			name = res;
+			sourceTree = "<group>";
+		};
+		9CCB63831B248B8E00F951AD /* util */ = {
+			isa = PBXGroup;
+			children = (
+				9CCB63841B248BA300F951AD /* STModalUtil.h */,
+			);
+			name = util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +278,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CCC338F1B25445C00B890F2 /* share_friend@2x.png in Resources */,
+				9CCC33901B25445C00B890F2 /* share_wechat@2x.png in Resources */,
 				9CCAF5961B21608600A7647F /* Main.storyboard in Resources */,
 				9CCAF59B1B21608600A7647F /* LaunchScreen.xib in Resources */,
 				9CCAF5C01B21AAE100A7647F /* onepiece@3x.jpeg in Resources */,
@@ -277,9 +305,11 @@
 				9CCAF5B31B2160BB00A7647F /* STModal.m in Sources */,
 				9CCAF5931B21608600A7647F /* ViewController.m in Sources */,
 				9CCAF5901B21608600A7647F /* AppDelegate.m in Sources */,
-				9CCAF5BB1B21A04300A7647F /* DemoViewController.m in Sources */,
+				9CCAF5BB1B21A04300A7647F /* AlertViewController.m in Sources */,
+				9CCB63871B24912300F951AD /* ActionSheetViewController.m in Sources */,
 				9CCAF58D1B21608600A7647F /* main.m in Sources */,
 				9CCAF5B81B2178DF00A7647F /* STAlertView.m in Sources */,
+				9CCA2BD51B22A7A100462E41 /* STActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -394,7 +424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -406,6 +436,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = STModalDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -416,6 +447,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = STModalDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -474,6 +506,7 @@
 				9CCAF5AC1B21608600A7647F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9CCAF5AD1B21608600A7647F /* Build configuration list for PBXNativeTarget "STModalDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +515,7 @@
 				9CCAF5AF1B21608600A7647F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

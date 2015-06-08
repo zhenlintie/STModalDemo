@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wmH-5b-1DB">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--alert-->
         <scene sceneID="5qP-La-LVh">
             <objects>
-                <viewController title="alert" id="hnD-sa-hs1" customClass="DemoViewController" sceneMemberID="viewController">
+                <viewController title="alert" id="hnD-sa-hs1" customClass="AlertViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9ta-d8-O54"/>
                         <viewControllerLayoutGuide type="bottom" id="q1g-ma-AlF"/>
@@ -16,18 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qxk-qp-HaP">
-                                <rect key="frame" x="16" y="46" width="74" height="31"/>
-                                <color key="backgroundColor" red="0.716796875" green="0.80242598684210531" blue="1" alpha="0.35000000000000003" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="海贼王">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="tip:" destination="hnD-sa-hs1" eventType="touchUpInside" id="rZu-GZ-ZRH"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ces-bc-wsW">
-                                <rect key="frame" x="142" y="46" width="84" height="30"/>
+                                <rect key="frame" x="140" y="157" width="84" height="30"/>
                                 <color key="backgroundColor" red="0.23085453752105264" green="0.57624080879999995" blue="0.77289197546578947" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="通知">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,14 +27,77 @@
                                     <action selector="notif:" destination="hnD-sa-hs1" eventType="touchUpInside" id="HYa-bQ-JBK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qxk-qp-HaP">
+                                <rect key="frame" x="145" y="75" width="74" height="31"/>
+                                <color key="backgroundColor" red="0.716796875" green="0.80242598684210531" blue="1" alpha="0.35000000000000003" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="海贼王">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tip:" destination="hnD-sa-hs1" eventType="touchUpInside" id="rZu-GZ-ZRH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="提示" id="6f3-c2-MXj"/>
+                    <tabBarItem key="tabBarItem" title="Alert" id="6f3-c2-MXj"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WIA-Ok-3Ir" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688.5" y="228.5"/>
+            <point key="canvasLocation" x="300.5" y="133.5"/>
+        </scene>
+        <!--ActionSheet-->
+        <scene sceneID="fdQ-ZP-Aoe">
+            <objects>
+                <viewController id="ehS-r4-W3i" customClass="ActionSheetViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lgo-ve-wuu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cqx-yi-JeB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kVS-3w-SD0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfD-8M-Aa0">
+                                <rect key="frame" x="131" y="61" width="112" height="30"/>
+                                <color key="backgroundColor" red="0.23085453750000001" green="0.57624080879999995" blue="0.77289197549999999" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="微信分享">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="wxShare:" destination="ehS-r4-W3i" eventType="touchUpInside" id="nuL-VO-Y6a"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noY-Pb-4vw">
+                                <rect key="frame" x="131" y="164" width="112" height="30"/>
+                                <color key="backgroundColor" red="0.23085453750000001" green="0.57624080879999995" blue="0.77289197549999999" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="删除">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteClicked:" destination="ehS-r4-W3i" eventType="touchUpInside" id="S3V-Xq-fJI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCL-Oh-UHu">
+                                <rect key="frame" x="131" y="288" width="112" height="30"/>
+                                <color key="backgroundColor" red="0.23085453750000001" green="0.57624080879999995" blue="0.77289197549999999" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="人物介绍">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="persons:" destination="ehS-r4-W3i" eventType="touchUpInside" id="eVu-GS-7OP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="ActionSheet" id="x8i-tU-1m5"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fxa-Lu-YOs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="746.5" y="133.5"/>
         </scene>
         <!--custom-->
         <scene sceneID="cRF-fE-vJt">
@@ -62,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xj2-re-yxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="806" y="-544"/>
+            <point key="canvasLocation" x="-107.5" y="133.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="n4z-Gc-QSG">
@@ -78,11 +132,12 @@
                     <connections>
                         <segue destination="1S0-R2-ueU" kind="relationship" relationship="viewControllers" id="IMM-ox-ZEC"/>
                         <segue destination="hnD-sa-hs1" kind="relationship" relationship="viewControllers" id="70q-L3-0dn"/>
+                        <segue destination="ehS-r4-W3i" kind="relationship" relationship="viewControllers" id="cnl-PA-M3l"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ZH-Hr-UD0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-14" y="-212"/>
+            <point key="canvasLocation" x="243.5" y="-725.5"/>
         </scene>
     </scenes>
 </document>
