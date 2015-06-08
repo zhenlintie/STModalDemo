@@ -1,5 +1,5 @@
 //
-//  DemoViewController.h
+//  AlertViewController.h
 //  STModalDemo
 //
 //  Created by zhenlintie on 15/6/5.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DemoViewController : UIViewController
+@interface AlertViewController : UIViewController
 
 @end

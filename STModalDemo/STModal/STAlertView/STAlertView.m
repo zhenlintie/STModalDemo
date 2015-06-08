@@ -8,14 +8,13 @@
 
 #import "STAlertView.h"
 #import "STModal.h"
+#import "STModalUtil.h"
 
 #define kSTAlertWidth        300
 #define kSTAlertPaddingV     11
 #define kSTAlertPaddingH     18
 #define kSTAlertRadius       13
 #define kSTAlertButtonHeight 40
-
-#define STAVRGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 @interface STAlertView ()
 
@@ -42,10 +41,10 @@
 
 - (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image message:(NSString *)message buttonTitles:(NSArray *)buttonTitles{
     if (self = [self initWithFrame:CGRectZero]){
-        _title = title;
+        _title = [title copy];
         _image = image;
-        _message = message;
-        _buttonTitles = buttonTitles;
+        _message = [message copy];
+        _buttonTitles = [NSArray arrayWithArray:buttonTitles];
     }
     return self;
 }
@@ -73,15 +72,15 @@
 
 - (void)loadUI{
     _backgroundView = [UIView new];
-    _backgroundView.backgroundColor = STAVRGBA(120, 125, 130, 1);
+    _backgroundView.backgroundColor = STModalRGBA(120, 125, 130, 1);
     
     _backgroundView.layer.cornerRadius = kSTAlertRadius;
-    _backgroundView.layer.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.9].CGColor;
+    _backgroundView.layer.shadowColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
     _backgroundView.layer.shadowOffset = CGSizeZero;
-    _backgroundView.layer.shadowOpacity = 0.9;
-    _backgroundView.layer.shadowRadius = kSTAlertRadius*2;
+    _backgroundView.layer.shadowOpacity = 1;
+    _backgroundView.layer.shadowRadius = kSTAlertRadius;
     _backgroundView.layer.borderWidth = 0.5;
-    _backgroundView.layer.borderColor = STAVRGBA(110, 115, 120, 1).CGColor;
+    _backgroundView.layer.borderColor = STModalRGBA(110, 115, 120, 1).CGColor;
     
     _containerView = [UIView new];
     _containerView.layer.cornerRadius = kSTAlertRadius;
@@ -143,9 +142,10 @@
     [self loadTitle];
     [self loadImage];
     [self loadMessage];
-    _buttonsHeight = kSTAlertButtonHeight*(_buttonTitles.count>2?_buttonTitles.count:1);
+    _buttonsHeight = kSTAlertButtonHeight*((_buttonTitles.count>2||_buttonTitles.count==0)?_buttonTitles.count:1);
     self.frame = CGRectMake(0, 0, kSTAlertWidth, MIN(MAX(_scrollBottom+2*insetY+_buttonsHeight, 2*kSTAlertRadius+kSTAlertPaddingV), _maxAlertViewHeight));
     _backgroundView.frame = self.bounds;
+    _backgroundView.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
     _containerView.frame = self.bounds;
     _scrollView.frame = CGRectMake(0, insetY, CGRectGetWidth(_containerView.frame),MIN(_scrollBottom, CGRectGetHeight(_containerView.frame)-2*insetY-_buttonsHeight));
     _scrollView.contentSize = CGSizeMake(_maxContentWidth, _scrollBottom);
@@ -187,7 +187,7 @@
 
 - (void)addLine:(CGRect)frame toView:(UIView *)view{
     UIView *line = [[UIView alloc] initWithFrame:frame];
-    line.backgroundColor = STAVRGBA(160, 170, 160, 0.5);
+    line.backgroundColor = STModalRGBA(160, 170, 160, 0.5);
     [view addSubview:line];
     [_lines addObject:line];
 }
@@ -233,7 +233,7 @@
     }
     if (!_messageLabel){
         _messageLabel = [UILabel new];
-        _messageLabel.textColor = STAVRGBA(240, 245, 255, 1);
+        _messageLabel.textColor = STModalRGBA(240, 245, 255, 1);
         _messageLabel.font = [UIFont systemFontOfSize:17];
         _messageLabel.textAlignment = NSTextAlignmentCenter;
         _messageLabel.numberOfLines = 0;
@@ -279,23 +279,13 @@
     [button setTitle:title forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     button.tag = tag;
-    [button setTitleColor:STAVRGBA(220, 210, 200, 1) forState:UIControlStateNormal];
-    [button setBackgroundImage:[self imageWithColor:STAVRGBA(135, 140, 145, 0.65)] forState:UIControlStateNormal];
-    [button setBackgroundImage:[self imageWithColor:STAVRGBA(135, 140, 145, 0.45)] forState:UIControlStateHighlighted];
+    [button setTitleColor:STModalRGBA(220, 210, 200, 1) forState:UIControlStateNormal];
+    [button setBackgroundImage:st_imageWithColor(STModalRGBA(135, 140, 145, 0.65)) forState:UIControlStateNormal];
+    [button setBackgroundImage:st_imageWithColor(STModalRGBA(135, 140, 145, 0.45)) forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_containerView addSubview:button];
     [_buttons addObject:button];
     return button;
-}
-
-- (UIImage *)imageWithColor:(UIColor *)color{
-    UIGraphicsBeginImageContext(CGSizeMake(1, 1));
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextFillRect(context, CGRectMake(0, 0, 1, 1));
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
 }
 
 - (void)buttonClicked:(UIButton *)button{
