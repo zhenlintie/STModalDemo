@@ -65,4 +65,11 @@
     [actionSheet show:YES];
 }
 
+- (IBAction)createBuilding:(id)sender {
+    [STActionSheet showTitle:nil
+           otherButtonTitles:@[@"楼主",@"1楼",@"2楼",@"3楼",@"4楼",@"5楼",@"6楼",@"7楼",]
+                      cancel:nil
+                   attribute:nil];
+}
+
 @end

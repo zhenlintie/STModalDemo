@@ -69,7 +69,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noY-Pb-4vw">
-                                <rect key="frame" x="131" y="164" width="112" height="30"/>
+                                <rect key="frame" x="131" y="139" width="112" height="30"/>
                                 <color key="backgroundColor" red="0.23085453750000001" green="0.57624080879999995" blue="0.77289197549999999" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="删除">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,13 +79,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCL-Oh-UHu">
-                                <rect key="frame" x="131" y="288" width="112" height="30"/>
+                                <rect key="frame" x="131" y="227" width="112" height="30"/>
                                 <color key="backgroundColor" red="0.23085453750000001" green="0.57624080879999995" blue="0.77289197549999999" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="人物介绍">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="persons:" destination="ehS-r4-W3i" eventType="touchUpInside" id="eVu-GS-7OP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWD-ae-dtG">
+                                <rect key="frame" x="131" y="308" width="112" height="30"/>
+                                <color key="backgroundColor" red="0.23085453750000001" green="0.57624080879999995" blue="0.77289197549999999" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="盖楼">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createBuilding:" destination="ehS-r4-W3i" eventType="touchUpInside" id="VfH-bA-Gj5"/>
                                 </connections>
                             </button>
                         </subviews>
