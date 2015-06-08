@@ -33,10 +33,10 @@
         self.layer.cornerRadius = kSTSheetRadius;
         self.layer.borderWidth = 0.5;
         self.layer.borderColor = kSTSheetLineColor.CGColor;
-        self.layer.shadowColor = [UIColor colorWithWhite:0 alpha:0.3].CGColor;
-        self.layer.shadowOffset = CGSizeZero;
-        self.layer.shadowOpacity = 0.3;
-        self.layer.shadowRadius = kSTSheetRadius*2;
+//        self.layer.shadowColor = [UIColor colorWithWhite:0 alpha:0.3].CGColor;
+//        self.layer.shadowOffset = CGSizeZero;
+//        self.layer.shadowOpacity = 0.3;
+//        self.layer.shadowRadius = kSTSheetRadius*2;
         
         _containerView = [[UIView alloc] initWithFrame:CGRectZero];
         _containerView.layer.cornerRadius = kSTSheetRadius;
@@ -57,7 +57,7 @@
 
 - (void)layoutSubviews{
     _containerView.frame = self.bounds;
-    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+//    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
 }
 
 @end
@@ -185,7 +185,8 @@
     
     self.modal = [STModal modalWithContentView:self];
     _modal.position = STModelPositionCenterBottom;
-    _modal.dimBackgroundWhenShow = NO;
+    _modal.dimBackgroundWhenShow = YES;
+    _modal.dimBackgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
     [_modal setShowAnimation:[self showAnimation]];
     [_modal setHideAnimation:[self hideAnimation]];
     
@@ -212,7 +213,7 @@
 - (st_modal_animation)showAnimation{
     return ^CGFloat(){
         self.transform = CGAffineTransformMakeTranslation(0.0f, CGRectGetHeight(self.frame));
-        CGFloat d = 0.5;
+        CGFloat d = 0.35;
         [UIView animateWithDuration:d
                               delay:0
              usingSpringWithDamping:1
@@ -229,7 +230,7 @@
 
 - (st_modal_animation)hideAnimation{
     return ^CGFloat(){
-        CGFloat d = 0.5;
+        CGFloat d = 0.3;
         [UIView animateWithDuration:d
                               delay:0
              usingSpringWithDamping:1
