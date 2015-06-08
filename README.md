@@ -31,3 +31,9 @@ STModal *modal = [STModal modal];
 * 效果图
 	
 	![](https://github.com/zhenlintie/STModalDemo/raw/master/screenshot2.gif)
+	
+##  STActionSheet
+* 基于`STModal`做的一个选择视图。
+* 效果图
+	
+	![](https://github.com/zhenlintie/STModalDemo/raw/master/actionsheet.gif)
