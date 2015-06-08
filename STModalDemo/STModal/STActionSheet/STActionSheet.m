@@ -11,7 +11,9 @@
 #import "STModalUtil.h"
 
 #define kSTSheetRadius             13
-#define kSTSheetPadding            8
+#define kSTSheetSidePaddingV       8
+#define kSTSheetSidePaddingH       8
+#define kSTSheetContentPadding     8
 #define kSTSheetButtonHeight       44
 #define kSTSheetLineColor          STModalRGBA(78, 78, 80, 1)
 #define kSTSheetBackColor          STModalRGBA(150, 164, 168, 1)
@@ -31,6 +33,10 @@
         self.layer.cornerRadius = kSTSheetRadius;
         self.layer.borderWidth = 0.5;
         self.layer.borderColor = kSTSheetLineColor.CGColor;
+        self.layer.shadowColor = [UIColor colorWithWhite:0 alpha:0.3].CGColor;
+        self.layer.shadowOffset = CGSizeZero;
+        self.layer.shadowOpacity = 0.3;
+        self.layer.shadowRadius = kSTSheetRadius*2;
         
         _containerView = [[UIView alloc] initWithFrame:CGRectZero];
         _containerView.layer.cornerRadius = kSTSheetRadius;
@@ -51,6 +57,7 @@
 
 - (void)layoutSubviews{
     _containerView.frame = self.bounds;
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
 }
 
 @end
@@ -183,7 +190,7 @@
     [_modal setHideAnimation:[self hideAnimation]];
     
     _screenSize = [UIScreen mainScreen].bounds.size;
-    _contentWidth = _screenSize.width-2*kSTSheetPadding;
+    _contentWidth = _screenSize.width-2*kSTSheetSidePaddingH;
     _buttonSize = CGSizeMake(_contentWidth, kSTSheetButtonHeight);
 }
 
@@ -255,24 +262,24 @@
     }
     [self reset];
     
-    CGFloat maxActionSheetHeight = _screenSize.height-kSTSheetPadding;
-    CGFloat bottomPadding = kSTSheetPadding;
+    CGFloat maxActionSheetHeight = _screenSize.height-kSTSheetSidePaddingV;
+    CGFloat bottomPadding = kSTSheetSidePaddingV;
     CGFloat maxContentHeight = maxActionSheetHeight-bottomPadding;;
     
     CGFloat cancelHeight = _cancelItem?(kSTSheetButtonHeight):0;
-    _maxTopContainerHeight = maxContentHeight-cancelHeight-(_cancelItem?kSTSheetPadding:0);
+    _maxTopContainerHeight = maxContentHeight-cancelHeight-(_cancelItem?kSTSheetSidePaddingV:0);
     _otherButtonsHeight = kSTSheetButtonHeight*_items.count;
     [self addCancelButton];
     [self addOtherButtons];
     [self addTitle];
     
-    CGFloat titleBottom = _title?CGRectGetHeight(_titleLabel.frame)+2*kSTSheetPadding:0;
+    CGFloat titleBottom = _title?CGRectGetHeight(_titleLabel.frame)+2*kSTSheetContentPadding:0;
     CGFloat scrollHeight = MIN(_otherButtonsHeight, _maxTopContainerHeight-titleBottom);
     
-    CGFloat contentPadding = (((scrollHeight+titleBottom)&&_cancelItem>0)?kSTSheetPadding:0);
+    CGFloat contentPadding = (((scrollHeight+titleBottom)&&_cancelItem>0)?kSTSheetContentPadding:0);
     CGFloat totalHeight = MIN(maxActionSheetHeight, scrollHeight+titleBottom+cancelHeight+contentPadding+bottomPadding);
     
-    self.frame = CGRectMake(kSTSheetPadding, _screenSize.height-totalHeight-kSTSheetPadding, _contentWidth,totalHeight);
+    self.frame = CGRectMake(kSTSheetSidePaddingH, _screenSize.height-totalHeight-kSTSheetSidePaddingH, _contentWidth,totalHeight);
     _topContainerView.frame = CGRectMake(0, 0, _contentWidth, scrollHeight+titleBottom);
     _scrollView.frame = CGRectMake(0, titleBottom, _contentWidth, scrollHeight);
     _scrollView.contentSize = CGSizeMake(_contentWidth, _otherButtonsHeight);
@@ -298,14 +305,15 @@
     }
     [self addSubview:_topContainerView];
     
-    CGFloat iconWidth = kSTSheetButtonHeight-2*kSTSheetPadding;
-    CGFloat maxWidth = MIN([self maxOtherButtonsTitleWidth],_contentWidth-iconWidth-3*kSTSheetPadding);
+    CGFloat iconWidth = kSTSheetButtonHeight-2*kSTSheetContentPadding;
+    CGFloat maxWidth = MIN([self maxOtherButtonsTitleWidth],_contentWidth-iconWidth-3*kSTSheetContentPadding);
     CGFloat top = 0;
     for (int i = 0; i < _items.count; i++){
         STASButton *button = [[STASButton alloc] initWithFrame:CGRectMake(0, top, _buttonSize.width, _buttonSize.height)];
         button.tag = i;
         button.item = _items[i];
         button.iconWidth = iconWidth;
+        button.exclusiveTouch = YES;
         button.iconPadding = (_contentWidth-maxWidth-button.iconWidth)/3.0;
         [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_scrollView addSubview:button];
@@ -316,18 +324,11 @@
     }
 }
 
-#pragma mark - util
-
-- (CGFloat)maxOtherButtonsTitleWidth{
-    __block CGFloat width = 0;
-    [_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSAttributedString *title = [(STActionItem *)obj attributedTitle];
-        CGSize size = [title boundingRectWithSize:CGSizeMake(_contentWidth-kSTSheetPadding*2, kSTSheetButtonHeight) options:NSStringDrawingTruncatesLastVisibleLine context:nil].size;
-        if (size.width > width){
-            width = size.width;
-        }
-    }];
-    return width;
+- (void)addLine:(CGRect)frame toView:(UIView *)view{
+    UIView *line = [[UIView alloc] initWithFrame:frame];
+    line.backgroundColor = [kSTSheetLineColor colorWithAlphaComponent:0.25];
+    [view addSubview:line];
+    [_lines addObject:line];
 }
 
 - (void)addTitle{
@@ -335,7 +336,7 @@
         return;
     }
     if (!_titleLabel){
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kSTSheetPadding, 0, 0)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kSTSheetContentPadding, 0, 0)];
         _titleLabel.textColor = [kSTSheetTitleColor colorWithAlphaComponent:0.75];
         _titleLabel.font = [UIFont systemFontOfSize:14];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -344,16 +345,21 @@
     [self addSubview:_topContainerView];
     [_topContainerView addSubview:_titleLabel];
     _titleLabel.text = _title;
-    CGFloat titleWidth = _contentWidth-2*kSTSheetPadding;
+    CGFloat titleWidth = _contentWidth-2*kSTSheetContentPadding;
     CGSize size = [_titleLabel sizeThatFits:CGSizeMake(titleWidth, 10000)];
-    _titleLabel.frame = CGRectMake(kSTSheetPadding, kSTSheetPadding, titleWidth, size.height);
+    _titleLabel.frame = CGRectMake(kSTSheetContentPadding, kSTSheetContentPadding, titleWidth, size.height);
 }
 
-- (void)addLine:(CGRect)frame toView:(UIView *)view{
-    UIView *line = [[UIView alloc] initWithFrame:frame];
-    line.backgroundColor = [kSTSheetLineColor colorWithAlphaComponent:0.25];
-    [view addSubview:line];
-    [_lines addObject:line];
+- (CGFloat)maxOtherButtonsTitleWidth{
+    __block CGFloat width = 0;
+    [_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSAttributedString *title = [(STActionItem *)obj attributedTitle];
+        CGSize size = [title boundingRectWithSize:CGSizeMake(_contentWidth-kSTSheetContentPadding*2, kSTSheetButtonHeight) options:NSStringDrawingTruncatesLastVisibleLine context:nil].size;
+        if (size.width > width){
+            width = size.width;
+        }
+    }];
+    return width;
 }
 
 #pragma mark - show / hide

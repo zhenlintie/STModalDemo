@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9CCA2BD51B22A7A100462E41 /* STActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA2BD41B22A7A100462E41 /* STActionSheet.m */; };
 		9CCAF58D1B21608600A7647F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF58C1B21608600A7647F /* main.m */; };
 		9CCAF5901B21608600A7647F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF58F1B21608600A7647F /* AppDelegate.m */; };
 		9CCAF5931B21608600A7647F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5921B21608600A7647F /* ViewController.m */; };
-		9CCAF5961B21608600A7647F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5941B21608600A7647F /* Main.storyboard */; };
 		9CCAF5981B21608600A7647F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5971B21608600A7647F /* Images.xcassets */; };
 		9CCAF59B1B21608600A7647F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5991B21608600A7647F /* LaunchScreen.xib */; };
 		9CCAF5A71B21608600A7647F /* STModalDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5A61B21608600A7647F /* STModalDemoTests.m */; };
@@ -20,9 +18,11 @@
 		9CCAF5BB1B21A04300A7647F /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BA1B21A04300A7647F /* AlertViewController.m */; };
 		9CCAF5BF1B21AAE100A7647F /* lufei@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BD1B21AAE100A7647F /* lufei@2x.jpg */; };
 		9CCAF5C01B21AAE100A7647F /* onepiece@3x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BE1B21AAE100A7647F /* onepiece@3x.jpeg */; };
-		9CCB63871B24912300F951AD /* ActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCB63861B24912300F951AD /* ActionSheetViewController.m */; };
 		9CCC338F1B25445C00B890F2 /* share_friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CCC338D1B25445C00B890F2 /* share_friend@2x.png */; };
 		9CCC33901B25445C00B890F2 /* share_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CCC338E1B25445C00B890F2 /* share_wechat@2x.png */; };
+		9CCC33931B2564BA00B890F2 /* STActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCC33921B2564BA00B890F2 /* STActionSheet.m */; };
+		9CCC33961B25675C00B890F2 /* ActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCC33951B25675C00B890F2 /* ActionSheetViewController.m */; };
+		9CCC33991B25676400B890F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CCC33971B25676400B890F2 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9CCA2BD31B22A7A100462E41 /* STActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STActionSheet.h; sourceTree = "<group>"; };
-		9CCA2BD41B22A7A100462E41 /* STActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STActionSheet.m; sourceTree = "<group>"; };
 		9CCAF5871B21608600A7647F /* STModalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STModalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CCAF58B1B21608600A7647F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CCAF58C1B21608600A7647F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -45,7 +43,6 @@
 		9CCAF58F1B21608600A7647F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9CCAF5911B21608600A7647F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9CCAF5921B21608600A7647F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9CCAF5951B21608600A7647F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9CCAF5971B21608600A7647F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9CCAF59A1B21608600A7647F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		9CCAF5A01B21608600A7647F /* STModalDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STModalDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,10 +57,13 @@
 		9CCAF5BD1B21AAE100A7647F /* lufei@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "lufei@2x.jpg"; sourceTree = "<group>"; };
 		9CCAF5BE1B21AAE100A7647F /* onepiece@3x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "onepiece@3x.jpeg"; sourceTree = "<group>"; };
 		9CCB63841B248BA300F951AD /* STModalUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STModalUtil.h; sourceTree = "<group>"; };
-		9CCB63851B24912300F951AD /* ActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetViewController.h; sourceTree = "<group>"; };
-		9CCB63861B24912300F951AD /* ActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetViewController.m; sourceTree = "<group>"; };
 		9CCC338D1B25445C00B890F2 /* share_friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_friend@2x.png"; sourceTree = "<group>"; };
 		9CCC338E1B25445C00B890F2 /* share_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_wechat@2x.png"; sourceTree = "<group>"; };
+		9CCC33911B2564BA00B890F2 /* STActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STActionSheet.h; sourceTree = "<group>"; };
+		9CCC33921B2564BA00B890F2 /* STActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STActionSheet.m; sourceTree = "<group>"; };
+		9CCC33941B25675C00B890F2 /* ActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetViewController.h; sourceTree = "<group>"; };
+		9CCC33951B25675C00B890F2 /* ActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetViewController.m; sourceTree = "<group>"; };
+		9CCC33981B25676400B890F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,13 +106,13 @@
 		9CCAF5891B21608600A7647F /* STModalDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9CCC33971B25676400B890F2 /* Main.storyboard */,
 				9CCAF5911B21608600A7647F /* ViewController.h */,
 				9CCAF5921B21608600A7647F /* ViewController.m */,
 				9CCAF5B91B21A04300A7647F /* AlertViewController.h */,
 				9CCAF5BA1B21A04300A7647F /* AlertViewController.m */,
-				9CCB63851B24912300F951AD /* ActionSheetViewController.h */,
-				9CCB63861B24912300F951AD /* ActionSheetViewController.m */,
-				9CCAF5941B21608600A7647F /* Main.storyboard */,
+				9CCC33941B25675C00B890F2 /* ActionSheetViewController.h */,
+				9CCC33951B25675C00B890F2 /* ActionSheetViewController.m */,
 				9CCAF5BC1B21A05000A7647F /* res */,
 			);
 			path = STModalDemo;
@@ -159,8 +159,8 @@
 		9CCAF5B41B21789100A7647F /* STActionSheet */ = {
 			isa = PBXGroup;
 			children = (
-				9CCA2BD31B22A7A100462E41 /* STActionSheet.h */,
-				9CCA2BD41B22A7A100462E41 /* STActionSheet.m */,
+				9CCC33911B2564BA00B890F2 /* STActionSheet.h */,
+				9CCC33921B2564BA00B890F2 /* STActionSheet.m */,
 			);
 			path = STActionSheet;
 			sourceTree = "<group>";
@@ -278,9 +278,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CCC33991B25676400B890F2 /* Main.storyboard in Resources */,
 				9CCC338F1B25445C00B890F2 /* share_friend@2x.png in Resources */,
 				9CCC33901B25445C00B890F2 /* share_wechat@2x.png in Resources */,
-				9CCAF5961B21608600A7647F /* Main.storyboard in Resources */,
 				9CCAF59B1B21608600A7647F /* LaunchScreen.xib in Resources */,
 				9CCAF5C01B21AAE100A7647F /* onepiece@3x.jpeg in Resources */,
 				9CCAF5BF1B21AAE100A7647F /* lufei@2x.jpg in Resources */,
@@ -302,14 +302,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CCC33931B2564BA00B890F2 /* STActionSheet.m in Sources */,
 				9CCAF5B31B2160BB00A7647F /* STModal.m in Sources */,
 				9CCAF5931B21608600A7647F /* ViewController.m in Sources */,
 				9CCAF5901B21608600A7647F /* AppDelegate.m in Sources */,
+				9CCC33961B25675C00B890F2 /* ActionSheetViewController.m in Sources */,
 				9CCAF5BB1B21A04300A7647F /* AlertViewController.m in Sources */,
-				9CCB63871B24912300F951AD /* ActionSheetViewController.m in Sources */,
 				9CCAF58D1B21608600A7647F /* main.m in Sources */,
 				9CCAF5B81B2178DF00A7647F /* STAlertView.m in Sources */,
-				9CCA2BD51B22A7A100462E41 /* STActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,20 +332,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9CCAF5941B21608600A7647F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9CCAF5951B21608600A7647F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9CCAF5991B21608600A7647F /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				9CCAF59A1B21608600A7647F /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		9CCC33971B25676400B890F2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9CCC33981B25676400B890F2 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
