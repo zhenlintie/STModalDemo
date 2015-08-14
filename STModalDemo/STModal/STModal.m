@@ -101,16 +101,25 @@
             }];
         }
         else{
-            CGFloat d = 0;
-            if ((index == _viewStack.count-1) && animated){
-                d = duration;
-            }
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(d * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            void(^finishBlock)() = ^(){
                 [self removeView:view];
                 if (handler){
                     handler();
                 }
-            });
+            };
+            
+            if (animated && index == _viewStack.count-1){
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self removeView:view];
+                    if (handler){
+                        handler();
+                    }
+                });
+            }
+            else{
+                finishBlock();
+            }
         }
     }
 }
@@ -128,34 +137,42 @@
                                      _backgroundView.alpha = 1;
                                  }
                              }
-             completion:^(BOOL finished) {
-                 if (handler){
-                     handler();
-                 }
-             }];
+                             completion:^(BOOL finished) {
+                                 if (handler){
+                                     handler();
+                                 }
+                             }];
         }
     }
 }
 
 - (void)hideWithAnimated:(BOOL)animated duration:(CGFloat)duration completion:(void (^)(BOOL finished))completion{
     
-    if (animated && duration>0 && !_dimBackground){
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [_window setHidden:YES];
-            _backgroundView.alpha = 1;
-            completion(YES);
-        });
+    void (^finishedBlock)() = ^(){
+        [_window setHidden:YES];
+        _backgroundView.alpha = 1;
+        completion(YES);
+    };
+    
+    if (animated && duration > 0){
+        // 如果没有蒙版，则UIView动画里不会执行任何操作，动画也会失效
+        if (_dimBackground){
+            [UIView animateWithDuration:duration
+                             animations:^{
+                                 _backgroundView.alpha = 0;
+                             }
+                             completion:^(BOOL finished) {
+                                 finishedBlock();
+                             }];
+        }
+        else{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                finishedBlock();
+            });
+        }
     }
     else{
-        [UIView animateWithDuration:animated?duration:0
-                         animations:^{
-                             _backgroundView.alpha = 0;
-                         }
-                         completion:^(BOOL finished) {
-                             [_window setHidden:YES];
-                             _backgroundView.alpha = 1;
-                             completion(YES);
-                         }];
+        finishedBlock();
     }
 }
 
@@ -215,6 +232,7 @@
         _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         _containerView.backgroundColor = [UIColor clearColor];
         _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+        _tap.enabled = _hideWhenTouchOutside;
         [_containerView addGestureRecognizer:_tap];
     }
     return _containerView;
@@ -255,6 +273,11 @@
 
 #pragma mark - action
 
+- (void)setHideWhenTouchOutside:(BOOL)hideWhenTouchOutside{
+    _hideWhenTouchOutside = hideWhenTouchOutside;
+    _tap.enabled = _hideWhenTouchOutside;
+}
+
 - (void)tapped{
     if (_hideWhenTouchOutside && !CGRectContainsPoint(_contentView.frame, [_tap locationInView:_containerView])){
         [self hide:_animatedHideWhenTouchOutside];
@@ -270,18 +293,18 @@
     switch (_position) {
         case STModelPositionCenter:
         {
-            _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetMidY(_containerView.bounds));
-            break;
+        _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetMidY(_containerView.bounds));
+        break;
         }
         case STModelPositionCenterTop:
         {
-            _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetMidY(_contentView.bounds));
-            break;
+        _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetMidY(_contentView.bounds));
+        break;
         }
         case STModelPositionCenterBottom:
         {
-            _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetHeight(_containerView.bounds)-CGRectGetMidY(_contentView.bounds));
-            break;
+        _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetHeight(_containerView.bounds)-CGRectGetMidY(_contentView.bounds));
+        break;
         }
         default:
             break;

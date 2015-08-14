@@ -17,7 +17,7 @@
 		9CCAF5B81B2178DF00A7647F /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5B71B2178DF00A7647F /* STAlertView.m */; };
 		9CCAF5BB1B21A04300A7647F /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BA1B21A04300A7647F /* AlertViewController.m */; };
 		9CCAF5BF1B21AAE100A7647F /* lufei@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BD1B21AAE100A7647F /* lufei@2x.jpg */; };
-		9CCAF5C01B21AAE100A7647F /* onepiece@3x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BE1B21AAE100A7647F /* onepiece@3x.jpeg */; };
+		9CCAF5C01B21AAE100A7647F /* onepiece@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF5BE1B21AAE100A7647F /* onepiece@2x.jpeg */; };
 		9CCC338F1B25445C00B890F2 /* share_friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CCC338D1B25445C00B890F2 /* share_friend@2x.png */; };
 		9CCC33901B25445C00B890F2 /* share_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CCC338E1B25445C00B890F2 /* share_wechat@2x.png */; };
 		9CCC33931B2564BA00B890F2 /* STActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCC33921B2564BA00B890F2 /* STActionSheet.m */; };
@@ -55,7 +55,7 @@
 		9CCAF5B91B21A04300A7647F /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
 		9CCAF5BA1B21A04300A7647F /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
 		9CCAF5BD1B21AAE100A7647F /* lufei@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "lufei@2x.jpg"; sourceTree = "<group>"; };
-		9CCAF5BE1B21AAE100A7647F /* onepiece@3x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "onepiece@3x.jpeg"; sourceTree = "<group>"; };
+		9CCAF5BE1B21AAE100A7647F /* onepiece@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "onepiece@2x.jpeg"; sourceTree = "<group>"; };
 		9CCB63841B248BA300F951AD /* STModalUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STModalUtil.h; sourceTree = "<group>"; };
 		9CCC338D1B25445C00B890F2 /* share_friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_friend@2x.png"; sourceTree = "<group>"; };
 		9CCC338E1B25445C00B890F2 /* share_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_wechat@2x.png"; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 				9CCC338D1B25445C00B890F2 /* share_friend@2x.png */,
 				9CCC338E1B25445C00B890F2 /* share_wechat@2x.png */,
 				9CCAF5BD1B21AAE100A7647F /* lufei@2x.jpg */,
-				9CCAF5BE1B21AAE100A7647F /* onepiece@3x.jpeg */,
+				9CCAF5BE1B21AAE100A7647F /* onepiece@2x.jpeg */,
 				9CCAF58A1B21608600A7647F /* Supporting Files */,
 				9CCAF58E1B21608600A7647F /* AppDelegate.h */,
 				9CCAF58F1B21608600A7647F /* AppDelegate.m */,
@@ -282,7 +282,7 @@
 				9CCC338F1B25445C00B890F2 /* share_friend@2x.png in Resources */,
 				9CCC33901B25445C00B890F2 /* share_wechat@2x.png in Resources */,
 				9CCAF59B1B21608600A7647F /* LaunchScreen.xib in Resources */,
-				9CCAF5C01B21AAE100A7647F /* onepiece@3x.jpeg in Resources */,
+				9CCAF5C01B21AAE100A7647F /* onepiece@2x.jpeg in Resources */,
 				9CCAF5BF1B21AAE100A7647F /* lufei@2x.jpg in Resources */,
 				9CCAF5981B21608600A7647F /* Images.xcassets in Resources */,
 			);
