@@ -184,7 +184,7 @@
     _lines = [NSMutableArray new];
     
     self.modal = [STModal modalWithContentView:self];
-    _modal.position = STModelPositionCenterBottom;
+    _modal.positionMode = STModelPositionCenterBottom;
     _modal.dimBackgroundWhenShow = YES;
     _modal.dimBackgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
     [_modal setShowAnimation:[self showAnimation]];

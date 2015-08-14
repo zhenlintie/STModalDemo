@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C90E3121B7DDC120064AB89 /* STFrontModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C90E3111B7DDC120064AB89 /* STFrontModal.m */; };
 		9CCAF58D1B21608600A7647F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF58C1B21608600A7647F /* main.m */; };
 		9CCAF5901B21608600A7647F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF58F1B21608600A7647F /* AppDelegate.m */; };
 		9CCAF5931B21608600A7647F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCAF5921B21608600A7647F /* ViewController.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9C90E3101B7DDC120064AB89 /* STFrontModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFrontModal.h; sourceTree = "<group>"; };
+		9C90E3111B7DDC120064AB89 /* STFrontModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFrontModal.m; sourceTree = "<group>"; };
 		9CCAF5871B21608600A7647F /* STModalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STModalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CCAF58B1B21608600A7647F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CCAF58C1B21608600A7647F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -84,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C90E30F1B7DDC120064AB89 /* STFrontModal */ = {
+			isa = PBXGroup;
+			children = (
+				9C90E3101B7DDC120064AB89 /* STFrontModal.h */,
+				9C90E3111B7DDC120064AB89 /* STFrontModal.m */,
+			);
+			path = STFrontModal;
+			sourceTree = "<group>";
+		};
 		9CCAF57E1B21608500A7647F = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +159,7 @@
 		9CCAF5B01B2160A100A7647F /* STModal */ = {
 			isa = PBXGroup;
 			children = (
+				9C90E30F1B7DDC120064AB89 /* STFrontModal */,
 				9CCB63831B248B8E00F951AD /* util */,
 				9CCAF5B41B21789100A7647F /* STActionSheet */,
 				9CCAF5B51B21789100A7647F /* STAlertView */,
@@ -304,6 +317,7 @@
 			files = (
 				9CCC33931B2564BA00B890F2 /* STActionSheet.m in Sources */,
 				9CCAF5B31B2160BB00A7647F /* STModal.m in Sources */,
+				9C90E3121B7DDC120064AB89 /* STFrontModal.m in Sources */,
 				9CCAF5931B21608600A7647F /* ViewController.m in Sources */,
 				9CCAF5901B21608600A7647F /* AppDelegate.m in Sources */,
 				9CCC33961B25675C00B890F2 /* ActionSheetViewController.m in Sources */,

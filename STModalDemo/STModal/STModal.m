@@ -8,188 +8,35 @@
 
 #import "STModal.h"
 
+/**
+ * @discussion 公共窗口类
+ */
 @interface STModalWindow : NSObject
 
 + (instancetype)sharedModalWindow;
 
-@property (assign, nonatomic) BOOL dimBackground;
+- (void)showModal:(STModal *)modal animated:(BOOL)animated duration:(CGFloat)duration completion:(void(^)())comletion;
 
-- (void)setDimBackgroundColor:(UIColor *)color;
-
-- (void)addView:(UIView *)view;
-- (void)showWithAnimated:(BOOL)animated
-                duration:(CGFloat)duration
-                finished:(st_modal_block)handler;
-- (void)removeViewAndHide:(UIView *)view
-                 animated:(BOOL)animated
-                 duration:(CGFloat)duration
-                 finished:(st_modal_block)handler;
+- (void)hideModal:(STModal *)modal animated:(BOOL)animated duration:(CGFloat)duration completion:(void(^)())comletion;
 
 @end
 
-@implementation STModalWindow{
-    NSMutableArray *_viewStack;
-    UIWindow *_window;
-    UIView *_backgroundView;
-}
-
-+ (instancetype)sharedModalWindow{
-    static dispatch_once_t onceToken;
-    static STModalWindow *_sharedModalWindow = nil;
-    dispatch_once(&onceToken, ^{
-        _sharedModalWindow = [[self alloc] init];
-    });
-    return _sharedModalWindow;
-}
-
-- (instancetype)init{
-    if (self = [super init]){
-        _viewStack = [[NSMutableArray alloc] init];
-        _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        _window.windowLevel = UIWindowLevelAlert;
-        _window.backgroundColor = [UIColor clearColor];
-        _window.opaque = NO;
-        _backgroundView = [[UIView alloc] initWithFrame:_window.bounds];
-        [_window addSubview:_backgroundView];
-        [self setDimBackgroundColor:nil];
-    }
-    return self;
-}
-
-- (void)setDimBackgroundColor:(UIColor *)color{
-    _backgroundView.backgroundColor = color?:[UIColor colorWithWhite:0 alpha:0.55];
-}
-
-#pragma mark - views operation
-
-- (void)addView:(UIView *)view{
-    if (view){
-        if ([_viewStack indexOfObject:view] == NSNotFound){
-            [_window addSubview:view];
-        }
-        else{
-            [_viewStack removeObject:view];
-        }
-        [_viewStack addObject:view];
-        [self resetStackViewShowStatus];
-    }
-}
-
-- (void)removeView:(UIView *)view{
-    if (view && (NSNotFound != [_viewStack indexOfObject:view])){
-        [_viewStack removeObject:view];
-        [view removeFromSuperview];
-        [self resetStackViewShowStatus];
-    }
-}
-
-- (void)resetStackViewShowStatus{
-    [_viewStack enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [[(UIView *)obj layer] setHidden:(_viewStack.count-1)!=idx];
-    }];
-}
-
-- (void)removeViewAndHide:(UIView *)view animated:(BOOL)animated duration:(CGFloat)duration finished:(st_modal_block)handler{
-    NSInteger index = [_viewStack indexOfObject:view];
-    if (NSNotFound != index){
-        if (1 == _viewStack.count){
-            [self hideWithAnimated:animated duration:duration completion:^(BOOL finished) {
-                [self removeView:view];
-                if (handler){
-                    handler();
-                }
-            }];
-        }
-        else{
-            
-            void(^finishBlock)() = ^(){
-                [self removeView:view];
-                if (handler){
-                    handler();
-                }
-            };
-            
-            if (animated && index == _viewStack.count-1){
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self removeView:view];
-                    if (handler){
-                        handler();
-                    }
-                });
-            }
-            else{
-                finishBlock();
-            }
-        }
-    }
-}
-
-#pragma mark show / hide
-
-- (void)showWithAnimated:(BOOL)animated duration:(CGFloat)duration finished:(st_modal_block)handler{
-    if (_viewStack.count > 0){
-        if (1 == _viewStack.count){
-            [_window setHidden:NO];
-            _backgroundView.alpha = 0;
-            [UIView animateWithDuration:animated?duration:0
-                             animations:^{
-                                 if (_dimBackground){
-                                     _backgroundView.alpha = 1;
-                                 }
-                             }
-                             completion:^(BOOL finished) {
-                                 if (handler){
-                                     handler();
-                                 }
-                             }];
-        }
-    }
-}
-
-- (void)hideWithAnimated:(BOOL)animated duration:(CGFloat)duration completion:(void (^)(BOOL finished))completion{
-    
-    void (^finishedBlock)() = ^(){
-        [_window setHidden:YES];
-        _backgroundView.alpha = 1;
-        completion(YES);
-    };
-    
-    if (animated && duration > 0){
-        // 如果没有蒙版，则UIView动画里不会执行任何操作，动画也会失效
-        if (_dimBackground){
-            [UIView animateWithDuration:duration
-                             animations:^{
-                                 _backgroundView.alpha = 0;
-                             }
-                             completion:^(BOOL finished) {
-                                 finishedBlock();
-                             }];
-        }
-        else{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                finishedBlock();
-            });
-        }
-    }
-    else{
-        finishedBlock();
-    }
-}
-
-@end
-
-
-#pragma mark - #################################
 
 @interface STModal ()
+
 @property (strong, nonatomic) UIView *containerView;
+
+@property (strong, nonatomic) UIView *backgroundTapView;
+
+@property (strong, nonatomic) UITapGestureRecognizer *tap;
+
+@property (assign, nonatomic) BOOL onShowing;
+
+@property (assign, nonatomic) BOOL onTop;
+
 @end
 
-@implementation STModal{
-    STModalWindow *_window;
-    UITapGestureRecognizer *_tap;
-    BOOL _onShowing;
-}
+@implementation STModal
 
 + (instancetype)modal{
     return [self new];
@@ -203,12 +50,13 @@
 
 - (instancetype)init{
     if (self = [super init]){
-        _position = STModelPositionCenter;
+        _positionMode = STModelPositionCenter;
+        _position = CGPointMake(CGRectGetWidth([UIScreen mainScreen].bounds)/2.0, CGRectGetHeight([UIScreen mainScreen].bounds)/2.0);
         _onShowing = NO;
+        _onTop = NO;
         _hideWhenTouchOutside = NO;
         _animatedHideWhenTouchOutside = YES;
         _dimBackgroundWhenShow = YES;
-        _window = [STModalWindow sharedModalWindow];
     }
     return self;
 }
@@ -219,9 +67,9 @@
 
 #pragma mark - setter / getter
 
-- (void)setPosition:(STModelPosition)position{
-    if (_position != position){
-        _position = position;
+- (void)setPositionMode:(STModelPositionMode)positionMode{
+    if (_positionMode != positionMode){
+        _positionMode = positionMode;
         [self updateContentViewPosition];
     }
 }
@@ -231,9 +79,14 @@
         CGSize size = [UIScreen mainScreen].bounds.size;
         _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         _containerView.backgroundColor = [UIColor clearColor];
+        
+        _backgroundTapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+        _backgroundTapView.backgroundColor = [UIColor clearColor];
+        [_containerView addSubview:_backgroundTapView];
+        
         _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
         _tap.enabled = _hideWhenTouchOutside;
-        [_containerView addGestureRecognizer:_tap];
+        [_backgroundTapView addGestureRecognizer:_tap];
     }
     return _containerView;
 }
@@ -271,6 +124,10 @@
     return _onShowing;
 }
 
+- (STModalWindow *)window{
+    return [STModalWindow sharedModalWindow];
+}
+
 #pragma mark - action
 
 - (void)setHideWhenTouchOutside:(BOOL)hideWhenTouchOutside{
@@ -287,24 +144,21 @@
 #pragma mark - for show / hide
 
 - (void)updateContentViewPosition{
-    if (!_onShowing){
-        return;
-    }
-    switch (_position) {
-        case STModelPositionCenter:
-        {
-        _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetMidY(_containerView.bounds));
-        break;
+    switch (_positionMode) {
+        case STModelPositionCenter:{
+            _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetMidY(_containerView.bounds));
+            break;
         }
-        case STModelPositionCenterTop:
-        {
-        _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetMidY(_contentView.bounds));
-        break;
+        case STModelPositionCenterTop:{
+            _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetHeight(_contentView.bounds)/2.0);
+            break;
         }
-        case STModelPositionCenterBottom:
-        {
-        _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetHeight(_containerView.bounds)-CGRectGetMidY(_contentView.bounds));
-        break;
+        case STModelPositionCenterBottom:{
+            _contentView.center = CGPointMake(CGRectGetMidX(_containerView.bounds), CGRectGetHeight(_containerView.bounds)-CGRectGetHeight(_contentView.bounds)/2.0);
+            break;
+        }
+        case STModelPositionCustom:{
+            _contentView.center = self.position;
         }
         default:
             break;
@@ -313,31 +167,218 @@
 
 - (void)prepareUIForShow{
     [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.containerView addSubview:_contentView?:[UIView new]];
+    [_containerView addSubview:_backgroundTapView];
+    [self.containerView addSubview:_contentView];
     [self updateContentViewPosition];
-    [_window addView:_containerView];
-    [_window setDimBackgroundColor:self.dimBackgroundColor];
 }
 
 - (void)showContentView:(UIView *)contentView animated:(BOOL)animated{
+    NSAssert(contentView!=nil, @"没有可显示的视图");
     [self addModalContentView:contentView];
     [self show:animated];
 }
 
 - (void)show:(BOOL)animated{
-    if (_onShowing){
-        [_window addView:_containerView];
-        return;
-    }
-    _onShowing = YES;
+    NSAssert(_contentView!=nil, @"没有可显示的视图");
     [self prepareUIForShow];
-    _window.dimBackground = self.dimBackgroundWhenShow;
-    [_window showWithAnimated:animated duration:animated?self.showAnimation():0 finished:self.didShowHandler];
+    [self.window showModal:self animated:animated duration:animated?self.showAnimation():0 completion:self.didShowHandler];
 }
 
 - (void)hide:(BOOL)animated{
-    _onShowing = NO;
-    [_window removeViewAndHide:_containerView animated:animated duration:animated?self.hideAnimation():0 finished:self.didHideHandler];
+    [self.window hideModal:self animated:animated duration:animated?self.hideAnimation():0 completion:self.didHideHandler];
+}
+
+@end
+
+
+#define STModalWindowDefaultBackgroundColor [UIColor colorWithWhite:0 alpha:0.55]
+
+@interface STModalWindow ()
+
+@property (strong, nonatomic) NSMutableArray *modalsStack;
+
+@property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) UIView *dimBackgroundView;
+
+@property (assign, nonatomic) BOOL shouldDimBackground;
+
+@end
+
+@implementation STModalWindow{
+    BOOL _onShowing;
+}
+
++ (instancetype)sharedModalWindow{
+    static dispatch_once_t onceToken;
+    static STModalWindow *_sharedModalWindow = nil;
+    dispatch_once(&onceToken, ^{
+        _sharedModalWindow = [[self alloc] init];
+    });
+    return _sharedModalWindow;
+}
+
+- (instancetype)init{
+    if (self = [super init]){
+        _modalsStack = [[NSMutableArray alloc] init];
+        _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _window.windowLevel = UIWindowLevelAlert;
+        _window.backgroundColor = [UIColor clearColor];
+        _window.opaque = NO;
+        _dimBackgroundView = [[UIView alloc] initWithFrame:_window.bounds];
+        [_window addSubview:_dimBackgroundView];
+    }
+    return self;
+}
+
+#pragma mark - public modal operation
+
+- (void)showModal:(STModal *)modal animated:(BOOL)animated duration:(CGFloat)duration completion:(void(^)())comletion{
+    STModal *topModal = [self topModal];
+    [self pushModal:modal];
+    [self reloadData];
+    _window.hidden = NO;
+    [self transitionFromModal:topModal
+                      toModal:modal
+                     animated:animated
+                     duration:duration
+                   completion:comletion];
+}
+
+- (void)hideModal:(STModal *)modal animated:(BOOL)animated duration:(CGFloat)duration completion:(void(^)())comletion{
+    if ([self hasModal:modal]){
+        if ([[self topModal] isEqual:modal]){
+            STModal *toModal = (_modalsStack.count>1)?_modalsStack[_modalsStack.count-2]:nil;
+            [self transitionFromModal:modal
+                              toModal:toModal
+                             animated:animated
+                             duration:duration
+                           completion:^{
+                               [self popModal:modal];
+                               [modal.containerView removeFromSuperview];
+                               
+                               BOOL isNoModal = nil == [self topModal];
+                               if (isNoModal){
+                                   _window.hidden = YES;
+                               }
+                               else{
+                                   [self reloadData];
+                               }
+                               if (comletion){
+                                   comletion();
+                               }
+                           }];
+        }
+        else{
+            [self popModal:modal];
+            [modal.containerView removeFromSuperview];
+        }
+    }
+}
+
+#pragma mark - show or hide
+
+- (void)transitionFromModal:(STModal *)fromModal
+                    toModal:(STModal *)toModal
+                   animated:(BOOL)animated
+                   duration:(CGFloat)duration
+                 completion:(void(^)())completion{
+    
+    CGFloat fromA = 0, toA = 0;
+    UIColor *fromColor = nil, *toColor = nil;
+    
+    BOOL(^colosIsEqual)(UIColor *, UIColor *) = ^BOOL(UIColor *color1, UIColor *color2){
+        if (color1 && color2){
+            CGFloat r1, r2, g1, g2, b1, b2, a1, a2;
+            [color1 getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
+            [color2 getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
+            return (r1==r2)&&(g1==g2)&&(b1==b2)&&(a1==a2);
+        }
+        else if (!color1 && !color2){
+            return YES;
+        }
+        return NO;
+    };
+    
+    if (nil != fromModal){
+        fromA = fromModal.dimBackgroundWhenShow?1:0;
+        fromColor = fromModal.dimBackgroundColor?:STModalWindowDefaultBackgroundColor;
+    }
+    
+    if (nil != toModal){
+        toA = toModal.dimBackgroundWhenShow?1:0;
+        toColor = toModal.dimBackgroundColor?:STModalWindowDefaultBackgroundColor;
+    }
+    
+    _dimBackgroundView.alpha = fromA;
+    _dimBackgroundView.backgroundColor = fromColor;
+    if (fromA == toA && colosIsEqual(fromColor, toColor)){
+        // 如果没有任何变化UIView动画会立即结束，采用以下方法进行回调
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (completion){
+                completion();
+            }
+        });
+    }
+    else{
+        [UIView animateWithDuration:animated?duration:0
+                         animations:^{
+                             _dimBackgroundView.alpha = toA;
+                             _dimBackgroundView.backgroundColor = toColor;
+                         }
+                         completion:^(BOOL finished) {
+                             if (completion){
+                                 completion();
+                             }
+                         }];
+    }
+}
+
+- (void)reloadData{
+    STModal *topModal = [self topModal];
+    if (topModal){
+        self.shouldDimBackground = topModal.dimBackgroundWhenShow;
+        _dimBackgroundView.backgroundColor = topModal.dimBackgroundColor?:STModalWindowDefaultBackgroundColor;
+        
+        [topModal.containerView removeFromSuperview];
+        [_window addSubview:topModal.containerView];
+        
+        [[_modalsStack valueForKey:@"containerView"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [(UIView *)obj setHidden:(obj!=topModal.containerView)];
+        }];
+    }
+}
+
+- (void)setShouldDimBackground:(BOOL)shouldDimBackground{
+    _shouldDimBackground = shouldDimBackground;
+    _dimBackgroundView.alpha = _shouldDimBackground?1:0;
+}
+
+#pragma mark - stack operation
+
+- (void)pushModal:(STModal *)modal{
+    if ([self hasModal:modal]){
+        [self popModal:modal];
+    }
+    [_modalsStack addObject:modal];
+}
+
+- (STModal *)popModal:(STModal *)modal{
+    if ([self hasModal:modal]){
+        [_modalsStack removeObject:modal];
+    }
+    return [self topModal];
+}
+
+- (STModal *)topModal{
+    if (_modalsStack.count > 0){
+        return [_modalsStack lastObject];
+    }
+    return nil;
+}
+
+- (BOOL)hasModal:(STModal *)modal{
+    return (nil!=modal)&&([_modalsStack indexOfObject:modal] != NSNotFound);
 }
 
 @end

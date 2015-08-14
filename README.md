@@ -6,6 +6,9 @@
 	1. 只需关心需要弹出的视图
 	2. 可自定义动画
 	3. 当弹出多个视图时，以栈的方式显示
+	
+### 更新
+2015-08-14 优化了显示方式，增加了一个显示方式STFrontModal
 
 ### 用法
 
@@ -37,3 +40,6 @@ STModal *modal = [STModal modal];
 * 效果图
 	
 	![](https://github.com/zhenlintie/STModalDemo/raw/master/actionsheet.gif)
+	
+## STFrontModal
+![](https://github.com/zhenlintie/STModalDemo/raw/master/screen3.png)
